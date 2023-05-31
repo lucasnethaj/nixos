@@ -113,16 +113,20 @@
         overrideFolders = false;
         configDir = "/home/lucas/.config/syncthing";   # Folder for Syncthing's settings and keys
         folders = {
-              "/home/lucas/pix/" = {
-                id = "pix";
-                devices = [ "pixeline" ];
-              };
-            };
-        devices = {
-            pixeline = {
-                id = "TXI2RSE-4C27BOI-K5RV5PV-XLLOR7P-VP4EO5Y-EJ4TWHX-F2LKHUJ-CYKEZAH";
-            };
+          "/home/lucas/pix/" = {
+            id = "pix";
+            devices = [ "pixeline" ];
+          };
+          "/home/lucas/Music" = {
+              id = "e3h8d-mos25";
+              devices = [ "pixeline" ];
+          };
         };
+        devices = {
+          pixeline = {
+            id = "TXI2RSE-4C27BOI-K5RV5PV-XLLOR7P-VP4EO5Y-EJ4TWHX-F2LKHUJ-CYKEZAH";
+          };
+       };
     };
   };
 

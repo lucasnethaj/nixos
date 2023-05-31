@@ -91,9 +91,11 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  programs.fish.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.lucas = {
     isNormalUser = true;
+    shell = pkgs.fish;
     description = "Lucas Rasmussen";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
@@ -107,7 +109,6 @@
     syncthing = {
         enable = true;
         user = "lucas";
-        dataDir = "/home/lucas/Documents";    # Default folder for new synced folders
         configDir = "/home/lucas/Documents/.config/syncthing";   # Folder for Syncthing's settings and keys
     };
   };

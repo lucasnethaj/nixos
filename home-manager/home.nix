@@ -9,7 +9,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-    ./hyprland.nix
+    # ./hyprland.nix
   ];
 
   nixpkgs = {
@@ -34,7 +34,6 @@
     };
   };
 
-  # TODO: Set your username
   home = {
     username = "lucas";
     homeDirectory = "/home/lucas";
@@ -46,6 +45,7 @@
   # home.packages = with pkgs; [ steam ];
 
   # Enable home-manager and git
+  programs.fish.enable = true;
   programs.home-manager.enable = true;
   programs.git.enable = true;
 
@@ -53,5 +53,5 @@
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "unstable";
+  home.stateVersion = "23.05";
 }

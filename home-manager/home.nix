@@ -9,6 +9,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     ./nvim.nix
+    ./firefox.nix
     # ./hyprland.nix
   ];
 
@@ -42,10 +43,9 @@
   # Add stuff for your user as you see fit:
   programs.neovim.enable = true;
   # programs.hyprland.enable = true;
-  # home.packages = with pkgs; [ steam ];
+  home.packages = with pkgs; [ mosh ];
 
   # Enable home-manager and git
-  programs.fish.enable = true;
   programs.home-manager.enable = true;
   programs.git.enable = true;
 

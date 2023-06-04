@@ -9,7 +9,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     ./nvim.nix
-    ./firefox.nix
+    # ./firefox.nix
     # ./hyprland.nix
   ];
 
@@ -41,9 +41,11 @@
   };
 
   # Add stuff for your user as you see fit:
-  programs.neovim.enable = true;
-  # programs.hyprland.enable = true;
-  home.packages = with pkgs; [ mosh ];
+  home.packages = with pkgs; [
+      mosh
+      firefox
+      alacritty
+  ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;

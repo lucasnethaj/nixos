@@ -3,7 +3,10 @@
         enable = true;
     };
 
+    # Extra Deps
     home.packages = with pkgs; [
-        zip
+        unzip
+        gcc
+	    cargo
     ];
 }

@@ -46,37 +46,37 @@
     LC_TIME = "da_DK.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
-
-  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.enable = true;
-
   # Optionally, you may need to select the appropriate driver version for your specific GPU.
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 
   # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
   hardware.nvidia.modesetting.enable = true;
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+
+  services = {
+     xserver.enable = true;
+     pipewire.enable = true;
+     syncthing.enable = true;
+     avahi.enable = true;
+     #printing.enable = true;
+     tailscale.enable = true;
+     minecraft-server.enable = true;
+  };
+
+  services.xserver = {
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+    layout = "us";
+    xkbVariant = "";
+    videoDrivers = [ "nvidia" ];
+  };
 
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
-    enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
@@ -88,26 +88,7 @@
     #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  programs.fish.enable = true;
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.lucas = {
-    isNormalUser = true;
-    shell = pkgs.fish;
-    description = "Lucas Rasmussen";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      firefox
-      alacritty
-    #  thunderbird
-    ];
-  };
-
-  services = {
-    syncthing = {
-        enable = true;
+  services.syncthing = {
         user = "lucas";
         overrideDevices = false;
         overrideFolders = false;
@@ -128,6 +109,32 @@
           };
        };
     };
+
+   services.avahi = {
+  nssmdns = true;
+  ipv4 = true;
+  ipv6 = true;
+  publish = {
+    enable = true;
+    addresses = true;
+    workstation = true;
+  };
+  };
+
+  services.minecraft-server = {
+    eula = true;
+    openFirewall = true; 
+  };
+
+
+
+  programs.fish.enable = true;
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.lucas = {
+    isNormalUser = true;
+    shell = pkgs.fish;
+    description = "Lucas Rasmussen";
+    extraGroups = [ "networkmanager" "wheel" ];
   };
 
 
@@ -163,7 +170,7 @@
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedUDPPorts = [ 60000 60001 60002 60003 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
@@ -173,6 +180,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "unstable"; # Did you read the comment?
+  system.stateVersion = "23.05"; # Did you read the comment?
 
 }

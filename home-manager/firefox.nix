@@ -1,8 +1,8 @@
 { ... }: {
-
+    programs.firefox.enable = true;
     programs.firefox.profiles = {
         lucas = {
-            extensions = "";
+            # extensions = "";
 	    search.default = "DuckDuckGo";
         };
     };

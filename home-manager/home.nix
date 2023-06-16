@@ -35,6 +35,18 @@
     };
   };
 
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = false;
+    desktop = "${config.home.homeDirectory}/desk";
+    download = "${config.home.homeDirectory}/dwnlds";
+    pictures = "${config.home.homeDirectory}/pix";
+    templates = "${config.home.homeDirectory}/templ";
+    videos = "${config.home.homeDirectory}/pix/vids";
+  };
+
+  programs.go.goPath = ".local/go";
+
   home = {
     username = "lucas";
     homeDirectory = "/home/lucas";

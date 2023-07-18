@@ -8,7 +8,7 @@
     # inputs.nix-colors.homeManagerModule
 
     # You can also split up your configuration and import pieces of it here:
-    ./nvim.nix
+    # ./nvim.nix
     # ./firefox.nix
     # ./hyprland.nix
   ];
@@ -43,6 +43,7 @@
     pictures = "${config.home.homeDirectory}/pix";
     templates = "${config.home.homeDirectory}/templ";
     videos = "${config.home.homeDirectory}/pix/vids";
+    music = "${config.home.homeDirectory}/music";
   };
 
   programs.go.goPath = ".local/go";
@@ -57,7 +58,19 @@
       mosh
       firefox
       alacritty
+      gcc
   ];
+
+  services = {
+    syncthing.enable = true;
+  };
+
+  programs.password-store = {
+    enable = true;
+    settings = {
+      PASSWORD_STORE_DIR = "~/.local/share/pass";
+    };
+  };
 
   # Enable home-manager and git
   programs.home-manager.enable = true;

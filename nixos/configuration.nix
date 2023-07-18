@@ -57,11 +57,10 @@
   services = {
      xserver.enable = true;
      pipewire.enable = true;
-     syncthing.enable = true;
      avahi.enable = true;
      #printing.enable = true;
      tailscale.enable = true;
-     minecraft-server.enable = true;
+     minecraft-server.enable = false;
   };
 
   services.xserver = {
@@ -88,42 +87,21 @@
     #media-session.enable = true;
   };
 
-  services.syncthing = {
-        user = "lucas";
-        overrideDevices = false;
-        overrideFolders = false;
-        configDir = "/home/lucas/.config/syncthing";   # Folder for Syncthing's settings and keys
-        folders = {
-          "/home/lucas/pix/" = {
-            id = "pix";
-            devices = [ "pixeline" ];
-          };
-          "/home/lucas/Music" = {
-              id = "e3h8d-mos25";
-              devices = [ "pixeline" ];
-          };
-        };
-        devices = {
-          pixeline = {
-            id = "TXI2RSE-4C27BOI-K5RV5PV-XLLOR7P-VP4EO5Y-EJ4TWHX-F2LKHUJ-CYKEZAH";
-          };
-       };
+  services.avahi = {
+    nssmdns = true;
+    ipv4 = true;
+    ipv6 = true;
+    publish = {
+      enable = true;
+      addresses = true;
+      workstation = true;
     };
-
-   services.avahi = {
-  nssmdns = true;
-  ipv4 = true;
-  ipv6 = true;
-  publish = {
-    enable = true;
-    addresses = true;
-    workstation = true;
-  };
   };
 
   services.minecraft-server = {
     eula = true;
     openFirewall = true; 
+    # package = pkgs.papermc;
   };
 
 

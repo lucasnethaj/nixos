@@ -29,6 +29,13 @@
         # > Our main nixos configuration file <
         modules = [ ./nixos/configuration.nix ];
       };
+
+      retard-driver = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; }; # Pass flake inputs to our config
+        # > Our main nixos configuration file <
+        modules = [ ./nixos/retard/configuration.nix ];
+      };
+
     };
 
     # Standalone home-manager configuration entrypoint

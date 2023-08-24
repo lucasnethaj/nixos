@@ -37,4 +37,15 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  # Required to enable camera
+  hardware.ipu6 = {
+    enable = true;
+    platform = "ipu6ep";
+  };
+
+  # Enable fingerprint scanner
+  services.fprintd = {
+    enable = true;
+  };
 }

@@ -3,22 +3,24 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
+let
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      (import "${home-manager}/nixos")
     ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  networking.hostName = "plys"; # Define your hostname.
+  networking.hostName = "retard-driver"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -48,11 +50,6 @@
 
   hardware.opengl.enable = true;
   # Optionally, you may need to select the appropriate driver version for your specific GPU.
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-
-  # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
-  hardware.nvidia.modesetting.enable = true;
-
 
   services = {
      xserver.enable = true;
@@ -60,6 +57,7 @@
      avahi.enable = true;
      printing.enable = true;
      tailscale.enable = true;
+     fwupd.enable = true;
   };
 
   services.xserver = {
@@ -106,13 +104,17 @@
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
-
+programs.kdeconnect = {
+    enable = true;
+    package = pkgs.gnomeExtensions.gsconnect;
+};
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+     gnomeExtensions.blur-my-shell
      wget
      neovim
      doas
@@ -128,7 +130,6 @@
 
   programs.hyprland = {
   	enable = true;
-        nvidiaPatches = true;
         xwayland.enable = true;
   };
 

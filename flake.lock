@@ -94,11 +94,27 @@
         "type": "github"
       }
     },
+    "nur": {
+      "locked": {
+        "lastModified": 1692971158,
+        "narHash": "sha256-1dZ9WJaPs1lCnRRctDgKwOXIn/t+UaiwxwcVksFXwzQ=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "ee2675bab6f3120ada6671204e9eca40da2fb180",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "hyprland": "hyprland",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "nur": "nur"
       }
     },
     "wlroots": {

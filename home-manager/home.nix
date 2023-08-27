@@ -9,7 +9,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-    # ./firefox.nix
+    ./firefox.nix
     # ./hyprland.nix
   ];
 
@@ -53,13 +53,14 @@
     homeDirectory = "/home/lucas";
   };
 
-  # Add stuff for your user as you see fit:
+# Add stuff for your user as you see fit:
   home.packages = with pkgs; [
-      mosh
-      firefox
-      alacritty
-      gcc
+     mosh
+     alacritty
+     gcc
+     wl-clipboard
   ];
+
 
   services = {
     syncthing.enable = true;
@@ -74,7 +75,6 @@
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
-  programs.git.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

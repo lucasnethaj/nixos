@@ -3,14 +3,11 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
-in
+
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      (import "${home-manager}/nixos")
     ];
 
   # Bootloader.
@@ -65,7 +62,7 @@ in
     desktopManager.gnome.enable = true;
     layout = "us";
     xkbVariant = "";
-    videoDrivers = [ "nvidia" ];
+    videoDrivers = [ "intel" ];
   };
 
   # Enable sound with pipewire.
@@ -102,12 +99,17 @@ in
     shell = pkgs.fish;
     description = "Lucas Rasmussen";
     extraGroups = [ "networkmanager" "wheel" ];
+    packages = [
+        config.nur.repos.rycee.firefox-addons.darkreader
+        config.nur.repos.rycee.firefox-addons.ublock-origin
+    ];
   };
 
-programs.kdeconnect = {
-    enable = true;
-    package = pkgs.gnomeExtensions.gsconnect;
-};
+
+  programs.kdeconnect = {
+      enable = true;
+      package = pkgs.gnomeExtensions.gsconnect;
+  };
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -118,9 +120,10 @@ programs.kdeconnect = {
      wget
      neovim
      doas
+     thunderbird
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
+# Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {

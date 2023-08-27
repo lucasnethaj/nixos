@@ -7,7 +7,7 @@
 
     programs.neovim.plugins = with pkgs.vimPlugins; [
         nvim-treesitter
-        nvim-treesitter-parsers.d
+        nvim-treesitter.withAllGrammars
     ];
 
     # Extra Deps

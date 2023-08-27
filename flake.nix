@@ -5,6 +5,9 @@
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # NUR Packages
+    nur.url = github:nix-community/NUR;
+
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -20,7 +23,7 @@
 
   };
 
-  outputs = { nixpkgs, home-manager, hyprland, ... }@inputs: {
+  outputs = { nixpkgs, home-manager, hyprland, nur, ... }@inputs: {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
@@ -31,9 +34,17 @@
       };
 
       retard-driver = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; }; # Pass flake inputs to our config
-        # > Our main nixos configuration file <
-        modules = [ ./nixos/retard/configuration.nix ];
+          specialArgs = { inherit inputs; }; # Pass flake inputs to our config
+# > Our main nixos configuration file <
+          modules = [ 
+              ./nixos/retard/configuration.nix 
+              nur.nixosModules.nur
+              home-manager.nixosModules.home-manager
+              {
+                  home-manager.extraSpecialArgs = { inherit inputs; }; # allows access to flake inputs in hm modules
+                  home-manager.users.lucas.imports = [ ./home-manager/home.nix ];
+              }
+              ];
       };
 
     };
@@ -49,7 +60,13 @@
 		hyprland.homeManagerModules.default
 		{wayland.windowManager.hyprland.enable = true;}
 		./home-manager/home.nix
-	];
+        ];
+      };
+
+      "lucas@retard-driver" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = { inherit inputs; }; # Pass flake inputs to our config
+        # > Our main home-manager configuration file <
       };
     };
   };

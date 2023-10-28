@@ -5,7 +5,6 @@
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    dlang.url = "github:PetarKirov/dlang-nix";
     # NUR Packages
     nur.url = github:nix-community/NUR;
 
@@ -24,7 +23,7 @@
 
   };
 
-  outputs = { nixpkgs, home-manager, hyprland, nur, dlang, ... }@inputs: {
+  outputs = { nixpkgs, home-manager, hyprland, nur, ... }@inputs: {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
@@ -57,7 +56,6 @@
     homeConfigurations = {
       "lucas@plys" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        dlang = dlang.packages.x86_64-linux;
         extraSpecialArgs = { inherit inputs; }; # Pass flake inputs to our config
         # > Our main home-manager configuration file <
         modules = [ 

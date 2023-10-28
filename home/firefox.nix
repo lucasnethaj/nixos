@@ -8,13 +8,10 @@
                 search.default = "DuckDuckGo";
             };
 
-            extensions = with config.nur.repos.rycee.firefox-addons; [
-                anchors-reveal
-                    auto-tab-discard
-                    browserpass
-                    darkreader
-                    ublock-origin
-            ];
+            # extensions = with config.nur.repos.rycee.firefox-addons; [
+            #     darkreader
+            #     ublock-origin
+            # ];
 
         };
     };

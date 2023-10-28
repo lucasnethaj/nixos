@@ -59,6 +59,8 @@
      alacritty
      gcc
      wl-clipboard
+     dmd
+     dub
   ];
 
 

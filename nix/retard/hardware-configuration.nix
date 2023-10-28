@@ -38,6 +38,9 @@
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
+  # This will save you money and possibly your life!
+  services.thermald.enable = true;
+
   # Required to enable camera
   hardware.ipu6 = {
     enable = true;

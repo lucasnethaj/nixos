@@ -13,6 +13,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_5;
 
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -55,6 +56,7 @@
      printing.enable = true;
      tailscale.enable = true;
      fwupd.enable = true;
+     pcscd.enable = true;
   };
 
   services.xserver = {
@@ -93,18 +95,14 @@
   };
 
   programs.fish.enable = true;
+  programs.gnupg.agent.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.lucas = {
     isNormalUser = true;
     shell = pkgs.fish;
     description = "Lucas Rasmussen";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = [
-        config.nur.repos.rycee.firefox-addons.darkreader
-        config.nur.repos.rycee.firefox-addons.ublock-origin
-    ];
   };
-
 
   programs.kdeconnect = {
       enable = true;
@@ -117,10 +115,14 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
      gnomeExtensions.blur-my-shell
+     gnomeExtensions.syncthing-indicator
      wget
      neovim
      doas
      thunderbird
+     fractal
+     ipu6ep-camera-hal
+     ipu6ep-camera-bin
   ];
 
 # Some programs need SUID wrappers, can be configured further or are

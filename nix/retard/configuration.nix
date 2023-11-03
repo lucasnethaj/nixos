@@ -123,6 +123,8 @@
      fractal
      ipu6ep-camera-hal
      ipu6ep-camera-bin
+     dmd
+     dtools
   ];
 
 # Some programs need SUID wrappers, can be configured further or are
@@ -156,5 +158,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
-
 }

@@ -61,14 +61,45 @@
      #printing.enable = true;
      tailscale.enable = true;
      minecraft-server.enable = false;
+
+     jellyfin.enable = false;
+     radarr.enable = false;
+     sonarr.enable = false;
+     prowlarr.enable = false;
+     mullvad-vpn.enable = false;
+     transmission.enable = true;
+  };
+
+  services.jellyfin = {
+    openFirewall = true;
+  };
+
+ users.groups.radarr = {};
+ users.groups.sonarr = {};
+
+  users.users.sonarr = {
+    group = "sonarr";
+    isSystemUser = true;
+    extraGroups = [ "transmission" "jellyfin" ];
+
+  };
+
+  users.users.radarr = {
+    group = "radarr";
+    isSystemUser = true;
+    extraGroups = [ "transmission" "jellyfin" ];
   };
 
   services.xserver = {
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
-    layout = "us";
-    xkbVariant = "";
-    videoDrivers = [ "nvidia" ];
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
+      desktopManager.kodi.enable = true;
+      displayManager.autoLogin.enable = true;
+      displayManager.autoLogin.user = "kodi";
+
+      layout = "us,us";
+      xkbVariant = ",colemak";
+      videoDrivers = [ "nvidia" ];
   };
 
   # Enable sound with pipewire.
@@ -104,7 +135,14 @@
     # package = pkgs.papermc;
   };
 
+<<<<<<< Updated upstream:nix/configuration.nix
+=======
+
+>>>>>>> Stashed changes:nixos/configuration.nix
   programs.fish.enable = true;
+  programs.fish.promptInit = ''
+    any-nix-shell fish --info-right | source
+  '';
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.lucas = {
     isNormalUser = true;
@@ -113,13 +151,37 @@
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
+  programs.kdeconnect = {
+    enable = true;
+    package = pkgs.gnomeExtensions.gsconnect;
+  };
+
+  programs.firefox.enable = true;
+  programs.git.enable = true;
+
+  documentation.dev.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
      wget
+     gnomeExtensions.blur-my-shell
+     # linuxPackages.usbip
+     man-pages
+     man-pages-posix
+     nodejs
+     any-nix-shell
      neovim
      doas
+     gcc
+     wl-clipboard
+     unzip
+     ripgrep
+     fd
+     tree-sitter
+     htop
+     tldr
+     gdb
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -132,14 +194,18 @@
 
   programs.hyprland = {
   	enable = true;
-        nvidiaPatches = true;
+        enableNvidiaPatches = true;
         xwayland.enable = true;
+
   };
 
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+#   virtualisation.libvirtd.enable = true;
+#   programs.virt-manager.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -153,6 +219,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05"; # Did you read the comment?
-
+  system.stateVersion = "unstable"; # Did you read the comment?
 }

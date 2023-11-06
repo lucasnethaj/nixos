@@ -48,6 +48,8 @@
 
   hardware.opengl.enable = true;
   # Optionally, you may need to select the appropriate driver version for your specific GPU.
+
+  nixpkgs.config.allowUnfree = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 
   # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
@@ -135,10 +137,6 @@
     # package = pkgs.papermc;
   };
 
-<<<<<<< Updated upstream:nix/configuration.nix
-=======
-
->>>>>>> Stashed changes:nixos/configuration.nix
   programs.fish.enable = true;
   programs.fish.promptInit = ''
     any-nix-shell fish --info-right | source
@@ -187,10 +185,10 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   programs.hyprland = {
   	enable = true;

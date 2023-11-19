@@ -17,15 +17,9 @@
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
 
-    # Shameless plug: looking for a way to nixify your themes and make
-    # everything match nicely? Try nix-colors!
-    # nix-colors.url = "github:misterio77/nix-colors";
-
-    hyprland.url = "github:hyprwm/Hyprland";
-
   };
 
-  outputs = { nixpkgs, home-manager, hyprland, nur, ... }@inputs: {
+  outputs = { nixpkgs, home-manager, nur, ... }@inputs: {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
@@ -61,9 +55,7 @@
         extraSpecialArgs = { inherit inputs; }; # Pass flake inputs to our config
         # > Our main home-manager configuration file <
         modules = [ 
-		hyprland.homeManagerModules.default
-		{wayland.windowManager.hyprland.enable = true;}
-		./home-manager/home.nix
+            ./home-manager/home.nix
         ];
       };
 

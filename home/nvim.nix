@@ -2,7 +2,7 @@
     programs.neovim = {
         enable = true;
         defaultEditor = true;
-        extraConfig = lib.fileContents ./nvim;
+        # extraConfig = lib.fileContents ./nvim;
     };
 
     programs.neovim.plugins = with pkgs.vimPlugins; [
@@ -15,5 +15,6 @@
         unzip
         gcc
 	    cargo
+        nodejs
     ];
 }

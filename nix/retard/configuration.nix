@@ -57,6 +57,35 @@
      tailscale.enable = true;
      fwupd.enable = true;
      pcscd.enable = true;
+
+     # jellyfin.enable = false;
+     # radarr.enable = true;
+     # sonarr.enable = true;
+     # prowlarr.enable = true;
+     # mullvad-vpn.enable = true;
+     # transmission.enable = true;
+  };
+  virtualisation.docker.enable = true;
+
+
+  services.jellyfin = {
+    openFirewall = true;
+  };
+
+ users.groups.radarr = {};
+ users.groups.sonarr = {};
+
+  users.users.sonarr = {
+    group = "sonarr";
+    isSystemUser = true;
+    extraGroups = [ "transmission" "jellyfin" ];
+
+  };
+
+  users.users.radarr = {
+    group = "radarr";
+    isSystemUser = true;
+    extraGroups = [ "transmission" "jellyfin" ];
   };
 
   services.xserver = {
@@ -95,13 +124,21 @@
   };
 
   programs.fish.enable = true;
+  programs.adb.enable = true;
   programs.gnupg.agent.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.lucas = {
     isNormalUser = true;
     shell = pkgs.fish;
     description = "Lucas Rasmussen";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" ];
+  };
+
+  users.users.niko = {
+    isNormalUser = true;
+    shell = pkgs.fish;
+    description = "Nikolaj Frederiksen";
+    extraGroups = [ "networkmanager" "wheel"];
   };
 
   programs.kdeconnect = {
@@ -116,7 +153,10 @@
   environment.systemPackages = with pkgs; [
      gnomeExtensions.blur-my-shell
      gnomeExtensions.syncthing-indicator
+     fragments
+     unzip
      wget
+     htop
      neovim
      doas
      thunderbird
@@ -124,10 +164,13 @@
      ipu6ep-camera-hal
      ipu6ep-camera-bin
      dmd
+     ldc
      dtools
+     swww
+     # mullvad
   ];
 
-# Some programs need SUID wrappers, can be configured further or are
+  # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {

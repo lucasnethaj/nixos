@@ -8,7 +8,7 @@
     # inputs.nix-colors.homeManagerModule
 
     # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
+    ./nvim.nix
     ./firefox.nix
     # ./hyprland.nix
   ];
@@ -70,9 +70,19 @@
 
   programs.password-store = {
     enable = true;
-    settings = {
-      PASSWORD_STORE_DIR = "~/.local/share/pass";
+    package = pkgs.pass.withExtensions (exts: [ exts.pass-otp ]);
+  };
+
+
+  programs = {
+    direnv = {
+      enable = true;
+      # enableBashIntegration = true; # see note on other shells below
+      enableFishIntegration = true;
+      nix-direnv.enable = true;
     };
+
+    # fish.enable = true; # see note on other shells below
   };
 
   # Enable home-manager and git

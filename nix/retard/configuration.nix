@@ -52,6 +52,7 @@
   services = {
      xserver.enable = true;
      pipewire.enable = true;
+     pipewire.wireplumber.enable = true;
      avahi.enable = true;
      printing.enable = true;
      tailscale.enable = true;
@@ -113,7 +114,7 @@
   };
 
   services.avahi = {
-    nssmdns = true;
+    nssmdns4 = true;
     ipv4 = true;
     ipv6 = true;
     publish = {
@@ -162,11 +163,12 @@
      thunderbird
      fractal
      ipu6ep-camera-hal
-     ipu6ep-camera-bin
+     ipu6-camera-bins
      dmd
      ldc
      dtools
      swww
+     zathura
      # mullvad
   ];
 

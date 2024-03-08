@@ -6,7 +6,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # NUR Packages
-    nur.url = github:nix-community/NUR;
+    nur.url = "github:nix-community/NUR";
 
     # Home manager
     home-manager = { 

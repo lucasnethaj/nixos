@@ -69,7 +69,7 @@
      sonarr.enable = false;
      prowlarr.enable = false;
      mullvad-vpn.enable = false;
-     transmission.enable = true;
+     transmission.enable = false;
   };
 
   services.jellyfin = {
@@ -99,8 +99,8 @@
       displayManager.autoLogin.enable = true;
       displayManager.autoLogin.user = "kodi";
 
-      layout = "us,us";
-      xkbVariant = ",colemak";
+      xkb.layout = "us,us";
+      xkb.variant = ",colemak";
       videoDrivers = [ "nvidia" ];
   };
 
@@ -121,7 +121,7 @@
   };
 
   services.avahi = {
-    nssmdns = true;
+    nssmdns4 = true;
     ipv4 = true;
     ipv6 = true;
     publish = {
@@ -137,6 +137,7 @@
     # package = pkgs.papermc;
   };
 
+  programs.adb.enable = true;
   programs.fish.enable = true;
   programs.fish.promptInit = ''
     any-nix-shell fish --info-right | source
@@ -146,7 +147,7 @@
     isNormalUser = true;
     shell = pkgs.fish;
     description = "Lucas Rasmussen";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" ];
   };
 
   programs.kdeconnect = {
@@ -164,7 +165,9 @@
   environment.systemPackages = with pkgs; [
      wget
      gnomeExtensions.blur-my-shell
+     gnomeExtensions.syncthing-indicator
      # linuxPackages.usbip
+     pass
      man-pages
      man-pages-posix
      nodejs
@@ -172,6 +175,7 @@
      neovim
      doas
      gcc
+     thunderbird
      wl-clipboard
      unzip
      ripgrep
@@ -180,6 +184,12 @@
      htop
      tldr
      gdb
+     dmd
+     ldc
+     dub
+     dtools
+     nerdfonts
+     scrcpy
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -192,7 +202,6 @@
 
   programs.hyprland = {
   	enable = true;
-        enableNvidiaPatches = true;
         xwayland.enable = true;
 
   };
@@ -201,6 +210,13 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.syncthing = {
+    enable = true;
+    user = "lucas";
+    overrideFolders = false;
+    overrideDevices = false;
+  };
+
 
 #   virtualisation.libvirtd.enable = true;
 #   programs.virt-manager.enable = true;

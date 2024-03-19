@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, tagion, ... }:
 
 {
   imports =
@@ -66,8 +66,11 @@
      # mullvad-vpn.enable = true;
      # transmission.enable = true;
   };
-  virtualisation.docker.enable = true;
 
+  # virtualisation.docker.enable = true;
+  # virtualisation.waydroid.enable = true;
+  # virtualisation.libvirtd.enable = true;
+  # programs.virt-manager.enable = true;
 
   services.jellyfin = {
     openFirewall = true;
@@ -79,8 +82,7 @@
   users.users.sonarr = {
     group = "sonarr";
     isSystemUser = true;
-    extraGroups = [ "transmission" "jellyfin" ];
-
+    extraGroups = [ "transmission" "jellyfin" "libvirtd" ];
   };
 
   users.users.radarr = {
@@ -203,4 +205,33 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
+
+
+
+  # # Nixops experimentation
+  # virtualisation.libvirtd.enable = true;
+  # users.extraUsers.lucas.extraGroups = [ "libvirtd" ];
+  # networking.firewall.checkReversePath = false;
+
+  # containers.tagion = {
+  #   autoStart = true;
+  #
+  #     config = { config, pkgs, tagion, ... }: {
+  #       system.stateVersion = "23.11";
+  #
+  #       # services.nextcloud = {
+  #       #   enable = true;
+  #       #   package = pkgs.nextcloud28;
+  #       #   hostName = "localhost";
+  #       #   config.adminpassFile = "${pkgs.writeText "adminpass" "test123"}"; # DON'T DO THIS IN PRODUCTION - the password file will be world-readable in the Nix Store!
+  #       # };
+  #       environment.systemPackages = [
+  #           tagion #.packages.x86_64-linux.tagion
+  #       ];
+  #
+  #       # inputs.tagion.services.tagion = {
+  #       #     enable = true;
+  #       # };
+  #   };
+  # };
 }

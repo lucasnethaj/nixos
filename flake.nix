@@ -6,7 +6,9 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # NUR Packages
-    nur.url = github:nix-community/NUR;
+    nur.url = "github:nix-community/NUR";
+
+    # tagion.url = "github:tagion/tagion/current";
 
     # Home manager
     home-manager = { 
@@ -19,24 +21,26 @@
 
   };
 
-  outputs = { nixpkgs, home-manager, nur, ... }@inputs: {
+  outputs = { self, nixpkgs, tagion, home-manager, nur, ... }@attrs: 
+  {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       plys = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; }; # Pass flake inputs to our config
+        # specialArgs = { inherit inputs outputs; }; # Pass flake inputs to our config
         # > Our main nixos configuration file <
         modules = [ ./nix/configuration.nix ];
       };
 
       retard-driver = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; }; # Pass flake inputs to our config
+          system = "x86_64-linux";
+          specialArgs = attrs; # Pass flake inputs to our config
 # > Our main nixos configuration file <
           modules = [ 
-              ./nix/retard/configuration.nix 
+              ./nix/retard/configuration.nix
               home-manager.nixosModules.home-manager
               {
-                  home-manager.extraSpecialArgs = { inherit inputs; }; # allows access to flake inputs in hm modules
+                  home-manager.extraSpecialArgs = attrs; # allows access to flake inputs in hm modules
                   home-manager.users.lucas.imports = [ 
                       ./home/lucas.nix 
                       nur.nixosModules.nur
@@ -52,7 +56,7 @@
     homeConfigurations = {
       "lucas@plys" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = { inherit inputs; }; # Pass flake inputs to our config
+        extraSpecialArgs = attrs; # Pass flake inputs to our config
         # > Our main home-manager configuration file <
         modules = [ 
             ./home-manager/home.nix
@@ -61,7 +65,7 @@
 
       "lucas@retard-driver" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = { inherit inputs; }; # Pass flake inputs to our config
+        extraSpecialArgs = attrs; # Pass flake inputs to our config
         # > Our main home-manager configuration file <
       };
     };

@@ -8,7 +8,7 @@
     # NUR Packages
     nur.url = "github:nix-community/NUR";
 
-    # tagion.url = "github:tagion/tagion/current";
+    tagion.url = "github:tagion/tagion/current";
 
     # Home manager
     home-manager = { 

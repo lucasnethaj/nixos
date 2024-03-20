@@ -5,7 +5,7 @@
         profiles = {
             lucas = {
 # extensions = "";
-                search.default = "DuckDuckGo";
+                # search.default = "DuckDuckGo";
             };
 
             # extensions = with config.nur.repos.rycee.firefox-addons; [

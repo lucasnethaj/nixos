@@ -58,6 +58,7 @@
      tailscale.enable = true;
      fwupd.enable = true;
      pcscd.enable = true;
+     power-profiles-daemon.enable = true;
 
      # jellyfin.enable = false;
      # radarr.enable = true;
@@ -82,7 +83,7 @@
   users.users.sonarr = {
     group = "sonarr";
     isSystemUser = true;
-    extraGroups = [ "transmission" "jellyfin" "libvirtd" ];
+    extraGroups = [ "transmission" "jellyfin" ];
   };
 
   users.users.radarr = {
@@ -93,11 +94,13 @@
 
   services.xserver = {
     displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
+    # desktopManager.gnome.enable = true;
     layout = "us";
     xkbVariant = "";
     videoDrivers = [ "intel" ];
   };
+
+  xdg.portal.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -134,7 +137,7 @@
     isNormalUser = true;
     shell = pkgs.fish;
     description = "Lucas Rasmussen";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" "input" ];
   };
 
   users.users.niko = {
@@ -171,8 +174,18 @@
      dtools
      swww
      zathura
+     imv
      # mullvad
   ];
+
+  fonts.packages = with pkgs; [
+     nerdfonts
+  ];
+
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  qt.enable = true;
+  qt.platformTheme = "gnome";
+  qt.style = "adwaita-dark";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -182,9 +195,10 @@
   #   enableSSHSupport = true;
   # };
 
+  programs.waybar.enable = true;
   programs.hyprland = {
   	enable = true;
-        xwayland.enable = true;
+    xwayland.enable = true;
   };
 
   # List services that you want to enable:

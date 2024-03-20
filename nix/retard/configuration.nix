@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, tagion, ... }:
+{ config, pkgs, ... }:
 
 {
   imports =
@@ -13,7 +13,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_5;
+  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_5;
 
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -95,8 +95,8 @@
   services.xserver = {
     displayManager.gdm.enable = true;
     # desktopManager.gnome.enable = true;
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
     videoDrivers = [ "intel" ];
   };
 
@@ -119,7 +119,7 @@
   };
 
   services.avahi = {
-    nssmdns4 = true;
+    nssmdns = true;
     ipv4 = true;
     ipv6 = true;
     publish = {
@@ -175,6 +175,7 @@
      swww
      zathura
      imv
+     wofi
      # mullvad
   ];
 

@@ -8,8 +8,6 @@
     # NUR Packages
     nur.url = "github:nix-community/NUR";
 
-    tagion.url = "github:tagion/tagion/current";
-
     # Home manager
     home-manager = { 
         url = "github:nix-community/home-manager";
@@ -21,7 +19,7 @@
 
   };
 
-  outputs = { self, nixpkgs, tagion, home-manager, nur, ... }@attrs: 
+  outputs = { self, nixpkgs, home-manager, nur, ... }@attrs: 
   {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'

@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -50,22 +51,22 @@
   # Optionally, you may need to select the appropriate driver version for your specific GPU.
 
   services = {
-     xserver.enable = true;
-     pipewire.enable = true;
-     pipewire.wireplumber.enable = true;
-     avahi.enable = true;
-     printing.enable = true;
-     tailscale.enable = true;
-     fwupd.enable = true;
-     pcscd.enable = true;
-     power-profiles-daemon.enable = true;
+    xserver.enable = true;
+    pipewire.enable = true;
+    pipewire.wireplumber.enable = true;
+    avahi.enable = true;
+    printing.enable = true;
+    tailscale.enable = true;
+    fwupd.enable = true;
+    pcscd.enable = true;
+    power-profiles-daemon.enable = true;
 
-     # jellyfin.enable = false;
-     # radarr.enable = true;
-     # sonarr.enable = true;
-     # prowlarr.enable = true;
-     # mullvad-vpn.enable = true;
-     # transmission.enable = true;
+    # jellyfin.enable = false;
+    # radarr.enable = true;
+    # sonarr.enable = true;
+    # prowlarr.enable = true;
+    # mullvad-vpn.enable = true;
+    # transmission.enable = true;
   };
 
   # virtualisation.docker.enable = true;
@@ -77,8 +78,8 @@
     openFirewall = true;
   };
 
- users.groups.radarr = {};
- users.groups.sonarr = {};
+  users.groups.radarr = { };
+  users.groups.sonarr = { };
 
   users.users.sonarr = {
     group = "sonarr";
@@ -144,12 +145,12 @@
     isNormalUser = true;
     shell = pkgs.fish;
     description = "Nikolaj Frederiksen";
-    extraGroups = [ "networkmanager" "wheel"];
+    extraGroups = [ "networkmanager" "wheel" ];
   };
 
   programs.kdeconnect = {
-      enable = true;
-      package = pkgs.gnomeExtensions.gsconnect;
+    enable = true;
+    package = pkgs.gnomeExtensions.gsconnect;
   };
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -157,35 +158,35 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     gnomeExtensions.blur-my-shell
-     gnomeExtensions.syncthing-indicator
-     fragments
-     unzip
-     wget
-     htop
-     neovim
-     doas
-     thunderbird
-     fractal
-     ipu6ep-camera-hal
-     ipu6-camera-bins
-     dmd
-     ldc
-     dtools
-     swww
-     zathura
-     imv
-     wofi
-     pasystray
-     blueberry
-     brightnessctl
-     grimblast
-     wdisplays
-     # mullvad
+    gnomeExtensions.blur-my-shell
+    gnomeExtensions.syncthing-indicator
+    fragments
+    unzip
+    wget
+    htop
+    neovim
+    doas
+    thunderbird
+    fractal
+    ipu6ep-camera-hal
+    ipu6-camera-bins
+    dmd
+    ldc
+    dtools
+    swww
+    zathura
+    imv
+    wofi
+    pasystray
+    blueberry
+    brightnessctl
+    grimblast
+    wdisplays
+    # mullvad
   ];
 
   fonts.packages = with pkgs; [
-     nerdfonts
+    nerdfonts
   ];
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -203,7 +204,7 @@
 
   programs.waybar.enable = true;
   programs.hyprland = {
-  	enable = true;
+    enable = true;
     xwayland.enable = true;
   };
 

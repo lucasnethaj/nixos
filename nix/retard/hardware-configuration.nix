@@ -3,7 +3,7 @@
 # to /etc/nixos/configuration.nix instead.
 { config, lib, pkgs, modulesPath, ... }:
 
-let 
+let
   ivsc-firmware = with pkgs;
     stdenv.mkDerivation rec {
       pname = "ivsc-firmware";
@@ -27,7 +27,8 @@ let
 in
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" ];
@@ -36,18 +37,19 @@ in
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/361ae8ed-0b8b-40aa-aec6-cefe86123eb5";
+    {
+      device = "/dev/disk/by-uuid/361ae8ed-0b8b-40aa-aec6-cefe86123eb5";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/3963-F7BA";
+    {
+      device = "/dev/disk/by-uuid/3963-F7BA";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/b42f27ec-df8b-4d3e-aef8-9db5f4ef35f8"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/b42f27ec-df8b-4d3e-aef8-9db5f4ef35f8"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

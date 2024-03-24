@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -57,27 +58,27 @@
 
 
   services = {
-     xserver.enable = true;
-     pipewire.enable = true;
-     avahi.enable = true;
-     #printing.enable = true;
-     tailscale.enable = true;
-     minecraft-server.enable = false;
+    xserver.enable = true;
+    pipewire.enable = true;
+    avahi.enable = true;
+    #printing.enable = true;
+    tailscale.enable = true;
+    minecraft-server.enable = false;
 
-     jellyfin.enable = false;
-     radarr.enable = false;
-     sonarr.enable = false;
-     prowlarr.enable = false;
-     mullvad-vpn.enable = false;
-     transmission.enable = true;
+    jellyfin.enable = false;
+    radarr.enable = false;
+    sonarr.enable = false;
+    prowlarr.enable = false;
+    mullvad-vpn.enable = false;
+    transmission.enable = true;
   };
 
   services.jellyfin = {
     openFirewall = true;
   };
 
- users.groups.radarr = {};
- users.groups.sonarr = {};
+  users.groups.radarr = { };
+  users.groups.sonarr = { };
 
   users.users.sonarr = {
     group = "sonarr";
@@ -93,15 +94,15 @@
   };
 
   services.xserver = {
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
-      desktopManager.kodi.enable = true;
-      displayManager.autoLogin.enable = true;
-      displayManager.autoLogin.user = "kodi";
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+    desktopManager.kodi.enable = true;
+    displayManager.autoLogin.enable = true;
+    displayManager.autoLogin.user = "kodi";
 
-      layout = "us,us";
-      xkbVariant = ",colemak";
-      videoDrivers = [ "nvidia" ];
+    layout = "us,us";
+    xkbVariant = ",colemak";
+    videoDrivers = [ "nvidia" ];
   };
 
   # Enable sound with pipewire.
@@ -133,7 +134,7 @@
 
   services.minecraft-server = {
     eula = true;
-    openFirewall = true; 
+    openFirewall = true;
     # package = pkgs.papermc;
   };
 
@@ -162,24 +163,24 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     wget
-     gnomeExtensions.blur-my-shell
-     # linuxPackages.usbip
-     man-pages
-     man-pages-posix
-     nodejs
-     any-nix-shell
-     neovim
-     doas
-     gcc
-     wl-clipboard
-     unzip
-     ripgrep
-     fd
-     tree-sitter
-     htop
-     tldr
-     gdb
+    wget
+    gnomeExtensions.blur-my-shell
+    # linuxPackages.usbip
+    man-pages
+    man-pages-posix
+    nodejs
+    any-nix-shell
+    neovim
+    doas
+    gcc
+    wl-clipboard
+    unzip
+    ripgrep
+    fd
+    tree-sitter
+    htop
+    tldr
+    gdb
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -191,9 +192,9 @@
   };
 
   programs.hyprland = {
-  	enable = true;
-        enableNvidiaPatches = true;
-        xwayland.enable = true;
+    enable = true;
+    enableNvidiaPatches = true;
+    xwayland.enable = true;
 
   };
 
@@ -202,8 +203,8 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-#   virtualisation.libvirtd.enable = true;
-#   programs.virt-manager.enable = true;
+  #   virtualisation.libvirtd.enable = true;
+  #   programs.virt-manager.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

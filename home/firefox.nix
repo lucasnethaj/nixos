@@ -7,12 +7,6 @@
 # extensions = "";
                 # search.default = "DuckDuckGo";
             };
-
-            # extensions = with config.nur.repos.rycee.firefox-addons; [
-            #     darkreader
-            #     ublock-origin
-            # ];
-
         };
     };
 }

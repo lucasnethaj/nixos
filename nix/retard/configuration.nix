@@ -176,6 +176,11 @@
      zathura
      imv
      wofi
+     pasystray
+     blueberry
+     brightnessctl
+     grimblast
+     wdisplays
      # mullvad
   ];
 

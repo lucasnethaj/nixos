@@ -5,9 +5,6 @@
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
 
-    # NUR Packages
-    nur.url = "github:nix-community/NUR";
-
     # Home manager
     home-manager = { 
         url = "github:nix-community/home-manager/release-23.11";
@@ -41,7 +38,6 @@
                   home-manager.extraSpecialArgs = attrs; # allows access to flake inputs in hm modules
                   home-manager.users.lucas.imports = [ 
                       ./home/lucas.nix 
-                      nur.nixosModules.nur
                   ];
               }
               ];

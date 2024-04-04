@@ -60,6 +60,7 @@
     fwupd.enable = true;
     pcscd.enable = true;
     power-profiles-daemon.enable = true;
+    gnome.gnome-keyring.enable = true;
 
     # jellyfin.enable = false;
     # radarr.enable = true;
@@ -173,16 +174,18 @@
     dmd
     ldc
     dtools
+
     swww
     zathura
     imv
     wofi
-    pasystray
     blueberry
     brightnessctl
     grimblast
     wdisplays
-    # mullvad
+    swaynotificationcenter
+    pavucontrol
+
   ];
 
   fonts.packages = with pkgs; [

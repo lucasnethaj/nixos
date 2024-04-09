@@ -79,4 +79,6 @@ in
   services.fprintd = {
     enable = false;
   };
+
+  hardware.wooting.enable = true;
 }

@@ -47,13 +47,13 @@
     LC_TIME = "da_DK.UTF-8";
   };
 
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
+  # hardware.opengl.enable = true;
   # Optionally, you may need to select the appropriate driver version for your specific GPU.
 
   services = {
     xserver.enable = true;
     pipewire.enable = true;
-    pipewire.wireplumber.enable = true;
     avahi.enable = true;
     printing.enable = true;
     tailscale.enable = true;
@@ -70,7 +70,7 @@
     # transmission.enable = true;
   };
 
-  # virtualisation.docker.enable = true;
+  virtualisation.docker.enable = true;
   # virtualisation.waydroid.enable = true;
   # virtualisation.libvirtd.enable = true;
   # programs.virt-manager.enable = true;
@@ -106,12 +106,13 @@
 
   # Enable sound with pipewire.
   sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  # hardware.pulseaudio.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
 
@@ -121,7 +122,8 @@
   };
 
   services.avahi = {
-    nssmdns = true;
+    nssmdns4 = true;
+    # nssmdns = true;
     ipv4 = true;
     ipv6 = true;
     publish = {

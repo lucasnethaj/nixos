@@ -188,6 +188,8 @@
     swaynotificationcenter
     pavucontrol
 
+    firefox-wayland
+    neovim
   ];
 
   fonts.packages = with pkgs; [

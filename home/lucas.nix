@@ -7,9 +7,8 @@
     # If you want to use home-manager modules from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModule
 
-    # You can also split up your configuration and import pieces of it here:
-    ./nvim.nix
-    ./firefox.nix
+    # ./nvim.nix
+    # ./firefox.nix
     # ./hyprland.nix
   ];
 

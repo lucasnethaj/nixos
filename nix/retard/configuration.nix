@@ -73,6 +73,7 @@
   virtualisation.docker.enable = true;
   # virtualisation.waydroid.enable = true;
   # virtualisation.libvirtd.enable = true;
+  # virtualisation.podman.enable = true;
   # programs.virt-manager.enable = true;
 
   services.jellyfin = {
@@ -105,7 +106,7 @@
   xdg.portal.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
+  # sound.enable = true;
   # hardware.pulseaudio.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -190,6 +191,7 @@
 
     firefox-wayland
     neovim
+    wgnord
   ];
 
   fonts.packages = with pkgs; [

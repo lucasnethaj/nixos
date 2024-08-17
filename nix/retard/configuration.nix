@@ -47,13 +47,12 @@
     LC_TIME = "da_DK.UTF-8";
   };
 
-  hardware.graphics.enable = true;
-  # hardware.opengl.enable = true;
+  # hardware.graphics.enable = true;
+  hardware.opengl.enable = true;
   # Optionally, you may need to select the appropriate driver version for your specific GPU.
 
   services = {
     xserver.enable = true;
-    pipewire.enable = true;
     avahi.enable = true;
     printing.enable = true;
     tailscale.enable = true;
@@ -68,6 +67,7 @@
     # prowlarr.enable = true;
     # mullvad-vpn.enable = true;
     # transmission.enable = true;
+
   };
 
   virtualisation.docker.enable = true;
@@ -106,10 +106,10 @@
   xdg.portal.enable = true;
 
   # Enable sound with pipewire.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
+  sound.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
+    enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;

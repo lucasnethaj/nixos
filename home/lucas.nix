@@ -7,8 +7,7 @@
     # If you want to use home-manager modules from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModule
 
-    # You can also split up your configuration and import pieces of it here:
-    ./nvim.nix
+    # ./nvim.nix
     # ./firefox.nix
     # ./hyprland.nix
   ];
@@ -46,6 +45,20 @@
     music = "${config.home.homeDirectory}/music";
   };
 
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+  };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+  };
+
   programs.go.goPath = ".local/go";
 
   home = {
@@ -53,14 +66,14 @@
     homeDirectory = "/home/lucas";
   };
 
-# Add stuff for your user as you see fit:
+  # Add stuff for your user as you see fit:
   home.packages = with pkgs; [
-     mosh
-     alacritty
-     gcc
-     wl-clipboard
-     dmd
-     dub
+    mosh
+    alacritty
+    gcc
+    wl-clipboard
+    dmd
+    dub
   ];
 
 

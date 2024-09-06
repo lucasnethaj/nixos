@@ -96,12 +96,9 @@
   services.xserver = {
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
-    desktopManager.kodi.enable = true;
-    displayManager.autoLogin.enable = true;
-    displayManager.autoLogin.user = "kodi";
 
-    layout = "us,us";
-    xkbVariant = ",colemak";
+    xkb.layout = "us,us";
+    xkb.variant = ",colemak";
     videoDrivers = [ "nvidia" ];
   };
 
@@ -194,9 +191,7 @@
 
   programs.hyprland = {
     enable = true;
-    enableNvidiaPatches = true;
     xwayland.enable = true;
-
   };
 
   # List services that you want to enable:

@@ -14,6 +14,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.configurationLimit = 5;
   # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_5;
 
   # Enable flakes
@@ -47,8 +48,7 @@
     LC_TIME = "da_DK.UTF-8";
   };
 
-  # hardware.graphics.enable = true;
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
   # Optionally, you may need to select the appropriate driver version for your specific GPU.
 
   services = {
@@ -100,13 +100,12 @@
     desktopManager.gnome.enable = true;
     xkb.layout = "us";
     xkb.variant = "";
-    videoDrivers = [ "intel" ];
+    # videoDrivers = [ "intel" ];
   };
 
   xdg.portal.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -176,8 +175,8 @@
     doas
     thunderbird
     fractal
-    ipu6ep-camera-hal
-    ipu6-camera-bins
+    # ipu6ep-camera-hal
+    # ipu6-camera-bins
     dmd
     ldc
     dtools

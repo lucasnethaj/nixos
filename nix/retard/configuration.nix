@@ -97,7 +97,7 @@
 
   services.xserver = {
     displayManager.gdm.enable = true;
-    # desktopManager.gnome.enable = true;
+    desktopManager.gnome.enable = true;
     xkb.layout = "us";
     xkb.variant = "";
     videoDrivers = [ "intel" ];
@@ -107,9 +107,10 @@
 
   # Enable sound with pipewire.
   sound.enable = true;
+  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
-    enable = true;
+    # enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
@@ -156,6 +157,9 @@
     enable = true;
     package = pkgs.gnomeExtensions.gsconnect;
   };
+
+  programs.firefox.nativeMessagingHosts.passff = true;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -188,6 +192,8 @@
     wdisplays
     swaynotificationcenter
     pavucontrol
+    screen
+    qemu
 
     firefox-wayland
     neovim
@@ -213,7 +219,7 @@
 
   programs.waybar.enable = true;
   programs.hyprland = {
-    enable = true;
+    # enable = true;
     xwayland.enable = true;
   };
 

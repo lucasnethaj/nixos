@@ -20,7 +20,7 @@
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  networking.hostName = "retard-driver"; # Define your hostname.
+  networking.hostName = "retard"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -61,7 +61,6 @@
     power-profiles-daemon.enable = true;
     gnome.gnome-keyring.enable = true;
 
-    # jellyfin.enable = false;
     # radarr.enable = true;
     # sonarr.enable = true;
     # prowlarr.enable = true;
@@ -70,29 +69,13 @@
 
   };
 
-  virtualisation.docker.enable = true;
+  virtualisation.podman.enable = true;
   # virtualisation.waydroid.enable = true;
   # virtualisation.libvirtd.enable = true;
-  # virtualisation.podman.enable = true;
   # programs.virt-manager.enable = true;
 
   services.jellyfin = {
     openFirewall = true;
-  };
-
-  users.groups.radarr = { };
-  users.groups.sonarr = { };
-
-  users.users.sonarr = {
-    group = "sonarr";
-    isSystemUser = true;
-    extraGroups = [ "transmission" "jellyfin" ];
-  };
-
-  users.users.radarr = {
-    group = "radarr";
-    isSystemUser = true;
-    extraGroups = [ "transmission" "jellyfin" ];
   };
 
   services.xserver = {
@@ -142,7 +125,7 @@
     isNormalUser = true;
     shell = pkgs.fish;
     description = "Lucas Rasmussen";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" "input" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "input" ];
   };
 
   users.users.niko = {
@@ -157,7 +140,16 @@
     package = pkgs.gnomeExtensions.gsconnect;
   };
 
-  programs.firefox.nativeMessagingHosts.passff = true;
+  programs.firefox = {
+    enable = true;
+    package = pkgs.firefox;
+    nativeMessagingHosts.packages = [ pkgs.firefoxpwa pkgs.passff-host ];
+  };
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -167,16 +159,19 @@
   environment.systemPackages = with pkgs; [
     gnomeExtensions.blur-my-shell
     gnomeExtensions.syncthing-indicator
+    gnomeExtensions.wireless-hid
+    gnomeExtensions.wifi-qrcode
     fragments
     unzip
     wget
     htop
-    neovim
     doas
     thunderbird
+    telegram-desktop
+    ghostty
     fractal
-    # ipu6ep-camera-hal
-    # ipu6-camera-bins
+    ipu6ep-camera-hal
+    ipu6-camera-bins
     dmd
     ldc
     dtools
@@ -194,8 +189,12 @@
     screen
     qemu
 
-    firefox-wayland
-    neovim
+    man-pages
+    man-pages-posix
+    tracy
+
+    firefoxpwa
+    passff-host
     wgnord
   ];
 
@@ -230,6 +229,7 @@
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   networking.firewall.allowedUDPPorts = [ 60000 60001 60002 60003 ];
+  # networking.wireguard.enable = true;
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 

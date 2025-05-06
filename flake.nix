@@ -29,7 +29,7 @@
           modules = [ ./nix/configuration.nix ];
         };
 
-        retard-driver = nixpkgs.lib.nixosSystem {
+        retard = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           # > Our main nixos configuration file <
           modules = [

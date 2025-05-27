@@ -6,8 +6,11 @@
   };
 
   programs.neovim.plugins = with pkgs.vimPlugins; [
-    nvim-treesitter
-    nvim-treesitter.withAllGrammars
+     pkgs.vimPlugins.nvim-treesitter
+    (nvim-treesitter.withPlugins (p: [
+        p.c
+        p.d
+    ]))
   ];
 
   # Extra Deps

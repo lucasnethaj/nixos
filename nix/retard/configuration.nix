@@ -14,7 +14,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader.systemd-boot.configurationLimit = 2;
   # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_5;
 
   # Enable flakes
@@ -199,7 +199,8 @@
   ];
 
   fonts.packages = with pkgs; [
-    nerdfonts
+      nerd-fonts.hurmit
+      nerd-fonts.iosevka
   ];
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";

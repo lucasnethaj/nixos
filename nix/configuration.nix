@@ -58,6 +58,7 @@
   hardware.nvidia.modesetting.enable = true;
   hardware.nvidia.open = false;
 
+  hardware.wooting.enable = true;
 
   services = {
     xserver.enable = true;
@@ -147,7 +148,7 @@
     isNormalUser = true;
     shell = pkgs.fish;
     description = "Lucas Rasmussen";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "input" ];
   };
 
   programs.kdeconnect = {

@@ -78,9 +78,12 @@
     openFirewall = true;
   };
 
-  services.xserver = {
+  services = {
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
+  };
+
+  services.xserver = {
     xkb.layout = "us";
     xkb.variant = "";
     # videoDrivers = [ "intel" ];
@@ -116,6 +119,13 @@
       workstation = true;
     };
   };
+
+  # UDEV Rule to enable debugging BastardKB with https://usevia.app/errors
+  services.udev.enable = true;
+  services.udev.extraRules = ''
+    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
+  '';
+
 
   programs.fish.enable = true;
   programs.adb.enable = true;

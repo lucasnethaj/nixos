@@ -18,6 +18,5 @@
     unzip
     gcc
     cargo
-    nodejs
   ];
 }
